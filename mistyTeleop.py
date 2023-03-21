@@ -9,6 +9,7 @@ from findMisty import MistyScanner
 import argparse
 import requests
 from audioPlayer import AudioPlayer
+from deepface import DeepFace 
 
 
 #### ADD OBJECT RECOGNITION ####
@@ -169,6 +170,11 @@ def main(args):
         
 
         #### Detect ####
+        analysis = DeepFace.analyze(frame)
+        emotion = analysis['dominant_emotion']
+        
+        print(emotion)
+        
         frame = detector.detect(frame)
 
         imgbytes = cv2.imencode(".png", frame)[1].tobytes()
